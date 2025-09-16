@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
+import { Workflow } from "@/components/workflow";
 import { Features } from "@/components/features";
 import { Footer } from "@/components/footer";
 
@@ -14,6 +15,7 @@ export default function AboutPage() {
     <main className="min-h-[100dvh] text-white">
       <SiteHeader />
       <Hero />
+      <Workflow />
       <Features />
       <Footer />
     </main>
