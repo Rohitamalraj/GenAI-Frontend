@@ -55,7 +55,7 @@ export default function DocumentSummaryPage() {
   const [isContextPanelCollapsed, setIsContextPanelCollapsed] = useState(false)
   const [documentData, setDocumentData] = useState<DocumentData | null>(null)
 
-  // Mock data - comprehensive analysis data
+  // Mock summary data
   const mockSummary: SummaryData = {
     processingTime: 45,
     overview: `This Service Agreement establishes a professional relationship between TechCorp Solutions and the client for software development services. The contract outlines project scope, payment terms, intellectual property rights, and termination conditions. Key provisions include a 6-month initial term with automatic renewal, milestone-based payment structure, and comprehensive confidentiality clauses. The agreement favors the service provider with limited liability and strong IP protection, while providing reasonable client protections through defined deliverables and performance standards.`,
@@ -69,6 +69,7 @@ export default function DocumentSummaryPage() {
     ]
   }
 
+  // Mock simplified clauses
   const mockClauses: ClauseData[] = [
     {
       id: "clause_001",
@@ -120,6 +121,7 @@ export default function DocumentSummaryPage() {
     }
   ]
 
+  // Mock risk analysis
   const mockRisks: RiskData[] = [
     {
       id: "risk_001",
@@ -178,7 +180,7 @@ export default function DocumentSummaryPage() {
         name: data.fileName,
         uploadDate: new Date().toISOString(),
         size: data.fileSize,
-        type: "Service Agreement",
+        type: "Legal Document",
         status: "completed",
         extractedText: data.extractedText
       })
@@ -288,8 +290,14 @@ export default function DocumentSummaryPage() {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={handleDownloadReport}
+                onClick={() => router.push('/q-a-chat-interface')}
                 className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+              >
+                <span>Ask Questions About Document</span>
+              </button>
+              <button
+                onClick={handleDownloadReport}
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
               >
                 <span>Download Full Report</span>
               </button>
