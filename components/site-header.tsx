@@ -4,14 +4,13 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
-import { Menu, Home, Upload, Info, MessageCircle, Scale } from "lucide-react"
+import { Menu, Home, Upload, Users, Scale } from "lucide-react"
 
 export function SiteHeader() {
   const links = [
     { href: "/about", label: "Home", icon: Home },
     { href: "/document-upload", label: "Upload", icon: Upload },
-    { href: "/about", label: "About", icon: Info },
-    { href: "/contact", label: "Contact", icon: MessageCircle },
+    { href: "/connect", label: "Connect", icon: Users },
   ]
 
   return (

@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { SiteHeader } from "@/components/site-header"
 import { Footer } from "@/components/footer"
 import { WorkflowProgress } from '@/components/workflow-progress'
-import { DocumentContextPanel } from '@/components/document-context-panel'
 import { SummaryNavigationTabs } from '@/components/summary-navigation-tabs'
 import { DocumentSummaryCard } from '@/components/document-summary-card'
 import { SimplifiedClausesSection } from '@/components/simplified-clauses-section'
@@ -52,7 +51,6 @@ interface RiskData {
 export default function DocumentSummaryPage() {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState('summary')
-  const [isContextPanelCollapsed, setIsContextPanelCollapsed] = useState(false)
   const [documentData, setDocumentData] = useState<DocumentData | null>(null)
 
   // Mock summary data
@@ -190,10 +188,6 @@ export default function DocumentSummaryPage() {
     }
   }, [router])
 
-  const handleContextPanelToggle = (collapsed: boolean) => {
-    setIsContextPanelCollapsed(collapsed)
-  }
-
   const handleRestartAnalysis = () => {
     sessionStorage.removeItem('uploadedDocument')
     router.push('/document-upload')
@@ -255,17 +249,7 @@ export default function DocumentSummaryPage() {
       <SiteHeader />
       <WorkflowProgress currentStep={2} />
       
-      <DocumentContextPanel
-        isCollapsed={isContextPanelCollapsed}
-        document={documentData}
-        onToggle={handleContextPanelToggle}
-        onRestart={handleRestartAnalysis}
-        onDownload={handleDownloadReport}
-      />
-      
-      <div className={`transition-all duration-200 ${
-        isContextPanelCollapsed ? 'lg:mr-12' : 'lg:mr-80'
-      }`}>
+      <div>
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto space-y-6">
             {/* Page Header */}
