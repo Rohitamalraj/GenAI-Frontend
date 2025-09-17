@@ -37,26 +37,26 @@ export function SummaryNavigationTabs({ activeTab, onTabChange }: SummaryNavigat
   ]
 
   return (
-    <div className="liquid-glass border border-white/10 bg-white/5 backdrop-blur-xl rounded-lg shadow-xl p-2 mb-6">
-      <div className="flex flex-col md:flex-row space-y-1 md:space-y-0 md:space-x-1">
+    <div className="liquid-glass border border-white/10 bg-white/5 backdrop-blur-xl rounded-lg shadow-xl p-3 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
         {tabs.map((tab) => {
           const IconComponent = tab.icon
           return (
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className={`flex items-center space-x-3 px-4 py-3 rounded-md text-left transition-all duration-200 ${
+              className={`flex items-center space-x-3 px-6 py-4 rounded-lg text-left transition-all duration-200 flex-1 ${
                 activeTab === tab.id
-                  ? 'bg-purple-600 text-white shadow-lg'
-                  : 'text-gray-300 hover:text-white hover:bg-white/10'
+                  ? 'bg-purple-600 text-white shadow-lg transform scale-[1.02]'
+                  : 'text-gray-300 hover:text-white hover:bg-white/10 hover:scale-[1.01]'
               }`}
             >
               <IconComponent 
-                className={`w-5 h-5 ${activeTab === tab.id ? 'text-white' : 'text-current'}`} 
+                className={`w-6 h-6 flex-shrink-0 ${activeTab === tab.id ? 'text-white' : 'text-current'}`} 
               />
-              <div className="flex-1">
-                <div className="font-medium text-sm">{tab.label}</div>
-                <div className={`text-xs ${
+              <div className="flex-1 min-w-0">
+                <div className="font-semibold text-base mb-1">{tab.label}</div>
+                <div className={`text-sm leading-tight ${
                   activeTab === tab.id 
                     ? 'text-purple-100' 
                     : 'text-gray-400'

@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { SiteHeader } from "@/components/site-header"
 import { Footer } from "@/components/footer"
 import { WorkflowProgress } from '@/components/workflow-progress'
-import { DocumentContextPanel } from '@/components/document-context-panel'
 import { ChatHeader } from '@/components/chat-header'
 import { ChatArea } from '@/components/chat-area'
 import { MessageInput } from '@/components/message-input'
@@ -40,7 +39,6 @@ export default function QAChatInterfacePage() {
   const [isTyping, setIsTyping] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(true)
-  const [isPanelCollapsed, setIsPanelCollapsed] = useState(false)
   const [documentData, setDocumentData] = useState<DocumentData | null>(null)
 
   // Mock AI responses with references
@@ -209,10 +207,6 @@ Feel free to ask me anything about your document, or choose from the suggested q
     setMessages([welcomeMessage])
   }
 
-  const handlePanelToggle = (collapsed: boolean) => {
-    setIsPanelCollapsed(collapsed)
-  }
-
   const handleDownloadDocument = () => {
     // Mock download functionality
     if (documentData) {
@@ -259,45 +253,36 @@ Feel free to ask me anything about your document, or choose from the suggested q
       <SiteHeader />
       <WorkflowProgress currentStep={3} />
       
-      <div className="flex flex-1 relative min-h-[calc(100vh-140px)]">
-        {/* Main Chat Area */}
-        <div className={`flex-1 flex flex-col transition-all duration-200 ${
-          isPanelCollapsed ? 'lg:mr-12' : 'lg:mr-80'
-        }`}>
-          <ChatHeader 
-            document={documentData}
-            onClearChat={handleClearChat}
-            messageCount={messages.length}
-          />
-          
-          {showSuggestions && (
-            <SuggestedQuestions 
-              onQuestionClick={handleQuestionClick}
-              isVisible={showSuggestions}
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Centered Chat Area */}
+          <div className="flex flex-col min-h-[calc(100vh-200px)]">
+            <ChatHeader 
+              document={documentData}
+              onClearChat={handleClearChat}
+              messageCount={messages.length}
             />
-          )}
-          
-          <ChatArea 
-            messages={messages}
-            isTyping={isTyping}
-            isEmpty={messages.length === 0}
-          />
-          
-          <MessageInput 
-            onSendMessage={handleSendMessage}
-            isLoading={isLoading}
-            disabled={isTyping}
-          />
+            
+            {showSuggestions && (
+              <SuggestedQuestions 
+                onQuestionClick={handleQuestionClick}
+                isVisible={showSuggestions}
+              />
+            )}
+            
+            <ChatArea 
+              messages={messages}
+              isTyping={isTyping}
+              isEmpty={messages.length === 0}
+            />
+            
+            <MessageInput 
+              onSendMessage={handleSendMessage}
+              isLoading={isLoading}
+              disabled={isTyping}
+            />
+          </div>
         </div>
-
-        {/* Document Context Panel */}
-        <DocumentContextPanel
-          isCollapsed={isPanelCollapsed}
-          document={documentData}
-          onToggle={handlePanelToggle}
-          onDownload={handleDownloadDocument}
-          onRestart={handleRestartAnalysis}
-        />
       </div>
       
       <Footer />
