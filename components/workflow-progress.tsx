@@ -11,41 +11,44 @@ export function WorkflowProgress({ currentStep, className = '' }: WorkflowProgre
   const steps = [
     {
       id: 1,
-      title: 'Upload Document',
-      description: 'Select and upload your legal document'
+      title: 'Upload',
+      description: 'Select document'
     },
     {
       id: 2,
-      title: 'AI Analysis',
-      description: 'Our AI processes and analyzes your document'
+      title: 'Analyze',
+      description: 'AI processing'
     },
     {
       id: 3,
-      title: 'Get Summary',
-      description: 'Receive a comprehensive summary and insights'
+      title: 'Summary',
+      description: 'Get insights'
     },
     {
       id: 4,
-      title: 'Ask Questions',
-      description: 'Interactive Q&A about your document'
+      title: 'Q&A',
+      description: 'Ask questions'
     }
   ]
 
   return (
-    <div className={`liquid-glass border border-white/10 bg-white/5 backdrop-blur-xl rounded-lg p-6 ${className}`}>
-      <h3 className="font-semibold text-white mb-6 text-center">Your Progress</h3>
+    <div className={`liquid-glass border border-white/10 bg-white/5 backdrop-blur-xl rounded-lg p-4 ${className}`}>
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="font-semibold text-white text-sm">Progress</h3>
+        <span className="text-xs text-gray-400">Step {currentStep} of {steps.length}</span>
+      </div>
       
-      <div className="space-y-4">
+      {/* Horizontal Steps */}
+      <div className="flex items-center justify-between">
         {steps.map((step, index) => {
           const isCompleted = step.id < currentStep
           const isCurrent = step.id === currentStep
-          const isUpcoming = step.id > currentStep
           
           return (
-            <div key={step.id} className="flex items-center space-x-4">
+            <div key={step.id} className="flex flex-col items-center flex-1">
               {/* Step Indicator */}
               <div className={`
-                flex items-center justify-center w-8 h-8 rounded-full border-2 transition-colors
+                flex items-center justify-center w-8 h-8 rounded-full border-2 transition-colors mb-2
                 ${isCompleted 
                   ? 'bg-green-500 border-green-500 text-white' 
                   : isCurrent 
@@ -56,14 +59,14 @@ export function WorkflowProgress({ currentStep, className = '' }: WorkflowProgre
                 {isCompleted ? (
                   <Check className="w-4 h-4" />
                 ) : (
-                  <span className="text-sm font-medium">{step.id}</span>
+                  <span className="text-xs font-medium">{step.id}</span>
                 )}
               </div>
 
               {/* Step Content */}
-              <div className="flex-1">
+              <div className="text-center">
                 <h4 className={`
-                  font-medium text-sm transition-colors
+                  font-medium text-xs transition-colors
                   ${isCompleted 
                     ? 'text-green-300' 
                     : isCurrent 
@@ -74,7 +77,7 @@ export function WorkflowProgress({ currentStep, className = '' }: WorkflowProgre
                   {step.title}
                 </h4>
                 <p className={`
-                  text-xs mt-0.5 transition-colors
+                  text-xs mt-0.5 transition-colors hidden sm:block
                   ${isCompleted 
                     ? 'text-green-400/70' 
                     : isCurrent 
@@ -86,17 +89,20 @@ export function WorkflowProgress({ currentStep, className = '' }: WorkflowProgre
                 </p>
               </div>
 
-              {/* Arrow Indicator */}
+              {/* Connection Line */}
               {index < steps.length - 1 && (
-                <ChevronRight className={`
-                  w-4 h-4 transition-colors
-                  ${isCompleted 
-                    ? 'text-green-400' 
-                    : isCurrent 
-                      ? 'text-purple-400' 
-                      : 'text-gray-600'
-                  }
-                `} />
+                <div className="absolute mt-4 w-full h-0.5 bg-gray-600 hidden sm:block"
+                     style={{ 
+                       left: `${(index + 0.5) * (100 / steps.length)}%`,
+                       width: `${100 / steps.length}%`,
+                       zIndex: -1
+                     }}>
+                  <div 
+                    className={`h-full transition-all duration-500 ${
+                      isCompleted ? 'bg-green-500' : 'bg-gray-600'
+                    }`}
+                  />
+                </div>
               )}
             </div>
           )
@@ -104,16 +110,13 @@ export function WorkflowProgress({ currentStep, className = '' }: WorkflowProgre
       </div>
 
       {/* Progress Bar */}
-      <div className="mt-6">
-        <div className="w-full bg-gray-700 rounded-full h-2">
+      <div className="mt-4">
+        <div className="w-full bg-gray-700 rounded-full h-1.5">
           <div 
-            className="bg-gradient-to-r from-purple-500 to-green-500 h-2 rounded-full transition-all duration-500 ease-out"
+            className="bg-gradient-to-r from-purple-500 to-green-500 h-1.5 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${((currentStep - 1) / (steps.length - 1)) * 100}%` }}
           />
         </div>
-        <p className="text-center text-xs text-gray-400 mt-2">
-          Step {currentStep} of {steps.length}
-        </p>
       </div>
     </div>
   )

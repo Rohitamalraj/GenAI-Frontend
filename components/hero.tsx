@@ -20,10 +20,7 @@ export function Hero() {
     <section className="relative isolate overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center py-14 sm:py-20">
-          <div className="mb-5 flex items-center gap-2">
-            <div className="flex items-center justify-center w-8 h-8 bg-purple-600 rounded-lg">
-              <Scale className="w-5 h-5 text-white" />
-            </div>
+          <div className="mb-5 flex items-center justify-center">
             <p className="text-sm uppercase tracking-[0.25em] text-purple-300/80">Legal Lens</p>
           </div>
           <h1 className="mt-3 text-center text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
