@@ -183,7 +183,7 @@ export default function ConnectPage() {
                 <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">1</span>
                 </div>
-                <h3 className="font-semibold mb-2">Upload Document</h3>
+                <h3 className="font-semibold mb-2 text-white">Upload Document</h3>
                 <p className="text-sm text-gray-300">Start with AI analysis of your legal document</p>
               </div>
               
@@ -191,7 +191,7 @@ export default function ConnectPage() {
                 <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">2</span>
                 </div>
-                <h3 className="font-semibold mb-2">Choose Expert</h3>
+                <h3 className="font-semibold mb-2 text-white">Choose Expert</h3>
                 <p className="text-sm text-gray-300">Select a lawyer specializing in your document type</p>
               </div>
               
@@ -199,7 +199,7 @@ export default function ConnectPage() {
                 <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">3</span>
                 </div>
-                <h3 className="font-semibold mb-2">Book Session</h3>
+                <h3 className="font-semibold mb-2 text-white">Book Session</h3>
                 <p className="text-sm text-gray-300">Schedule a consultation that fits your timeline</p>
               </div>
               
@@ -207,7 +207,7 @@ export default function ConnectPage() {
                 <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">4</span>
                 </div>
-                <h3 className="font-semibold mb-2">Get Clarity</h3>
+                <h3 className="font-semibold mb-2 text-white">Get Clarity</h3>
                 <p className="text-sm text-gray-300">Discuss concerns and get personalized legal advice</p>
               </div>
             </div>

@@ -8,7 +8,6 @@ import { FileUploadZone } from '@/components/file-upload-zone'
 import { SupportedFormats } from '@/components/supported-formats'
 import { DocumentPreview } from '@/components/document-preview'
 import { UploadError } from '@/components/upload-error'
-import { UploadTips } from '@/components/upload-tips'
 import { WorkflowProgress } from '@/components/workflow-progress'
 import { useRouter } from 'next/navigation'
 
@@ -228,48 +227,40 @@ Note: For best results, ensure images are clear and well-lit with minimal skew o
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Main Upload Area */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Workflow Progress */}
-              <WorkflowProgress currentStep={1} />
+          <div className="max-w-3xl mx-auto space-y-6">
+            {/* Workflow Progress */}
+            <WorkflowProgress currentStep={1} />
 
-              {/* File Upload Zone */}
-              {!uploadedFile && !error && (
-                <>
-                  <FileUploadZone
-                    onFileSelect={handleFileUpload}
-                    isUploading={isUploading}
-                    uploadProgress={uploadProgress}
-                  />
-                  <SupportedFormats />
-                </>
-              )}
-
-              {/* Document Preview */}
-              {uploadedFile && (
-                <DocumentPreview
-                  file={uploadedFile.file}
-                  extractedText={uploadedFile.extractedText}
-                  onContinue={handleContinue}
-                  onRemove={handleRemoveFile}
+            {/* File Upload Zone */}
+            {!uploadedFile && !error && (
+              <>
+                <FileUploadZone
+                  onFileSelect={handleFileUpload}
+                  isUploading={isUploading}
+                  uploadProgress={uploadProgress}
                 />
-              )}
+                <SupportedFormats />
+              </>
+            )}
 
-              {/* Error Display */}
-              {error && (
-                <UploadError
-                  error={error}
-                  onRetry={handleRetry}
-                  onDismiss={handleDismissError}
-                />
-              )}
-            </div>
+            {/* Document Preview */}
+            {uploadedFile && (
+              <DocumentPreview
+                file={uploadedFile.file}
+                extractedText={uploadedFile.extractedText}
+                onContinue={handleContinue}
+                onRemove={handleRemoveFile}
+              />
+            )}
 
-            {/* Sidebar */}
-            <div className="space-y-6">
-              <UploadTips />
-            </div>
+            {/* Error Display */}
+            {error && (
+              <UploadError
+                error={error}
+                onRetry={handleRetry}
+                onDismiss={handleDismissError}
+              />
+            )}
           </div>
         </div>
       </div>
