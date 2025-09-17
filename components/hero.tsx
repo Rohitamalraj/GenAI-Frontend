@@ -1,8 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { Scale } from "lucide-react"
 import Link from "next/link"
+import BlurText from "./BlurText"
 
 export function Hero() {
+  const handleAnimationComplete = () => {
+    console.log('Animation completed!');
+  };
+
   const buttonNew = (
     <Button asChild className="rounded-full bg-purple-600 px-6 text-white hover:bg-purple-500">
       <Link href="/document-upload">
@@ -22,9 +27,25 @@ export function Hero() {
             <p className="text-sm uppercase tracking-[0.25em] text-purple-300/80">Legal Lens</p>
           </div>
           <h1 className="mt-3 text-center text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-            <span className="block">AI-POWERED</span>
-            <span className="block text-purple-300 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)]">LEGAL ANALYSIS</span>
-            <span className="block">FOR EVERYONE</span>
+            <div className="block">
+              <BlurText
+                text="AI-POWERED"
+                delay={150}
+                animateBy="words"
+                direction="top"
+                className="text-purple-300 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)] justify-center"
+              />
+            </div>
+            <div className="block">
+              <BlurText
+                text="LEGAL ANALYSIS"
+                delay={150}
+                animateBy="words"
+                direction="top"
+                onAnimationComplete={handleAnimationComplete}
+                className="text-white justify-center"
+              />
+            </div>
           </h1>
           <p className="mt-6 text-center text-xl text-gray-300 max-w-2xl">
             Transform complex legal documents into clear, actionable insights with our AI-powered analysis platform.
