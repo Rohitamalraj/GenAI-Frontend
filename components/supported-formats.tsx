@@ -1,4 +1,4 @@
-import { CheckCircle, FileText, Image, Info } from 'lucide-react'
+import { CheckCircle, FileText, Info } from 'lucide-react'
 
 export function SupportedFormats() {
   const supportedFormats = [
@@ -22,20 +22,6 @@ export function SupportedFormats() {
       maxSize: '10 MB',
       color: 'text-blue-300',
       icon: FileText,
-    },
-    {
-      type: 'PNG',
-      description: 'Portable Network Graphics',
-      maxSize: '5 MB',
-      color: 'text-green-400',
-      icon: Image,
-    },
-    {
-      type: 'JPG',
-      description: 'JPEG Image Format',
-      maxSize: '5 MB',
-      color: 'text-orange-400',
-      icon: Image,
     },
   ]
 

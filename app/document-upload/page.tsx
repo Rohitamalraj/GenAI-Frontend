@@ -31,26 +31,22 @@ export default function DocumentUploadPage() {
 
   // File validation
   const validateFile = (file: File): UploadError | null => {
-    const supportedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/png', 'image/jpeg', 'image/jpg']
+    const supportedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword']
     const maxSizeDoc = 10 * 1024 * 1024 // 10MB for documents
-    const maxSizeImage = 5 * 1024 * 1024 // 5MB for images
 
     if (!supportedTypes.includes(file.type)) {
       return {
         type: 'validation',
         message: 'Unsupported file format',
-        details: `Please upload a PDF, DOCX, or image file. Received: ${file.type}`
+        details: `Please upload a PDF, DOCX, or DOC file. Received: ${file.type}`
       }
     }
 
-    const isImage = file.type.startsWith('image/')
-    const maxSize = isImage ? maxSizeImage : maxSizeDoc
-
-    if (file.size > maxSize) {
+    if (file.size > maxSizeDoc) {
       return {
         type: 'validation',
         message: 'File size too large',
-        details: `Maximum size is ${isImage ? '5MB' : '10MB'} for ${isImage ? 'images' : 'documents'}. Your file is ${(file.size / 1024 / 1024).toFixed(1)}MB`
+        details: `Maximum size is 10MB for documents. Your file is ${(file.size / 1024 / 1024).toFixed(1)}MB`
       }
     }
 
@@ -85,7 +81,7 @@ Note: This is sample text for demonstration purposes. Your actual document conte
           case 'doc':
             resolve(`LEGAL DOCUMENT CONTENT EXTRACTED
 
-This represents the extracted text from your Word document. The AI has successfully processed your DOCX file and identified the following structure:
+This represents the extracted text from your Word document. The AI has successfully processed your document file and identified the following structure:
 
 1. Introduction and Parties
 2. Terms of Agreement
@@ -99,30 +95,6 @@ Legal Analysis Preview:
 The document contains legally binding language with specific references to applicable laws and regulations. Key areas of focus include liability limitations, intellectual property rights, and dispute resolution procedures.
 
 Sample extracted content would continue here with the full text of your document...`)
-          
-          case 'png':
-          case 'jpg':
-          case 'jpeg':
-            resolve(`IMAGE DOCUMENT PROCESSED
-
-Text Recognition Results:
-The AI has analyzed your image and extracted the following text content:
-
-[This would contain the actual OCR results from your image]
-
-Document Type: Scanned Legal Document
-Quality: High resolution, clear text
-Confidence Level: 95%
-
-Extracted Content Preview:
-"Agreement between parties dated [DATE]
-Terms and Conditions:
-1. Payment terms
-2. Service delivery
-3. Termination clauses
-..."
-
-Note: For best results, ensure images are clear and well-lit with minimal skew or distortion.`)
           
           default:
             resolve('Text extraction completed. Content analysis ready for review.')
